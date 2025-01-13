@@ -16,6 +16,12 @@ Activate virtual environment
 pip install -r dev-requirements.txt
 ```
 
+Collect Static files
+
+```bash
+python3 manage.py collectstatic
+```
+
 Run development sever
 
 ```bash
