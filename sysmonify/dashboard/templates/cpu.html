@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+<div class="row">
+  <div class="col-8 d-flex flex-column">
+    <div class="row flex-grow">
+
+      <!-- CPU Utilization Charts -->
+      <div class="container-fluid d-flex flex-column vh-100">
+        <div class="row d-flex align-items-stretch">
+          <div class="col-12 d-flex flex-column">
+            <div class="col-12 grid-margin stretch-card flex-grow-1">
+              <div class="card card-rounded cpu-util-card">
+                <div class="card-body p-1 pb-0">
+                  <div class="d-flex justify-content-between p-2">
+                    <h6 class="card-title card-title-dash">CPU Utilization</h4>
+                    <h4 class="card-title card-title-dash">Avg. 66.9%</h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 h-100">
+                      <div class="status-summary-chart-wrapper pb-0 h-100">
+                        <canvas id="cpuUtilizationChart"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CPU Temps -->
+        <div class="row d-flex align-items-stretch">
+          <div class="col-12 d-flex flex-column">
+            <div class="row d-flex align-items-stretch">
+              <div class="col-12 d-flex flex-column">
+                <div class="col-12 grid-margin stretch-card flex-grow-1">
+                  <div class="card card-rounded cpu-temp-card">
+                    <div class="card-body p-1 pb-0">
+                      <div class="d-flex justify-content-between p-2">
+                        <h6 class="card-title card-title-dash">CPU Temps</h4>
+                        <h4 class="card-title card-title-dash">Package Temp 86.9C</h4>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12 h-100">
+                          <div class="status-summary-chart-wrapper pb-0 h-100">
+                            <canvas id="cpuTempChart"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CPU Details -->
+  <div class="col-4 d-flex flex-column">
+    <div class="row flex-grow">
+      <div class="container-fluid d-flex flex-column vh-100">
+        <div class="row d-flex align-items-stretch">
+          <div class="col-12 d-flex flex-column">
+            <div class="col-12 grid-margin stretch-card flex-grow-1">
+              <div class="card card-rounded">
+                <div class="card-body p-1 pb-0">
+                  <div class="d-flex justify-content-between">
+                    <h4 class="card-title card-title-dash px-2 pt-3">CPU Details</h4>
+                  </div>
+                  <hr class="mx-2 pt-0"/>
+                  <div class="cpu-details-card">
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Vendor ID: </h6>
+                      <p>GenuineIntel</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Model: </h6>
+                      <p>13th Gen Intel® Core™ i7-13700H</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Code Name: </h6>
+                      <p>Raptor Lake</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Physical Cores: </h6>
+                      <p>14</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Logical Processors: </h6>
+                      <p>20</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Max Turbo Frequency: </h6>
+                      <p>5 GHz</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">L1 Instruction Cache: </h6>
+                      <p>6 x 32 KB</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">L1 Data Cache: </h6>
+                      <p>6 x 48 KB</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">L2 Cache: </h6>
+                      <p>6 x 1280 KB</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">L3 Cache: </h6>
+                      <p>24 MB</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock main_content %}

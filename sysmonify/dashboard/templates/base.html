@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sysmonify</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/typicons/typicons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/vendor.bundle.base.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap-datepicker.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/dataTables.bootstrap4.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/select.dataTables.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
+  </head>
+
+  <body>
+    <div class="">
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row rounded-end">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+          <!-- Logo -->
+          <div>
+            <a class="navbar-brand brand-logo container d-flex align-items-center" href="{% url "index" %}">
+              <img src="{% static 'images/sysmonify.svg' %}" alt="logo" />
+              <h2 class="pt-1 pl-2">Sysmonify</h2>
+            </a>
+            <a class="navbar-brand brand-logo-mini" href="{% url "index" %}">
+              <img src="{% static 'images/sysmonify.svg' %}" alt="logo" />
+            </a>
+          </div>
+        </div>
+
+        <div class="p-1 m-1 position-absolute top-0 end-0 p-3">
+          <!-- Minimize Button (Top-right corner) -->
+          <button class="btn btn-minimize m-0" onclick="minimizeWindow()">_</button>
+          <!-- Close Button -->
+          <button class="btn btn-close m-0" onclick="window.close()"></button>
+        </div>
+      </nav>
+
+
+      <!-- Sidebar Nav -->
+      <div class="container-fluid page-body-wrapper">
+        <nav class="sidebar sidebar-offcanvas rounded-end" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item mt-3">
+              <a class="nav-link" href="{% url "index" %}">
+                <img src="{% static "icons/overview.svg" %}">
+                <span class="menu-title mx-3">Overview</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "processes" %}">
+                  <img src="{% static "icons/processes.svg" %}">
+                  <span class="menu-title mx-3">Proccesses</span>
+                </a>
+            </li>
+            {% if power %}
+            <li class="nav-item">
+                <a class="nav-link" href="#power">
+                  <img src="{% static "icons/power.svg" %}">
+                  <span class="menu-title mx-3">Power</span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="nav-item nav-category">Hardware</li>
+            <li class="nav-item">
+              <a class="nav-link"href="{% url "cpu" %}">
+                <img src="{% static "icons/cpu.svg" %}">
+                <span class="menu-title mx-3">CPU</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "gpu" %}">
+                <img src="{% static "icons/gpu.svg" %}">
+                <span class="menu-title mx-3">GPU</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "memory" %}">
+                <img src="{% static "icons/memory.svg" %}">
+                <span class="menu-title mx-3">Memory</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "io" %}">
+                <img src="{% static "icons/io.svg" %}">
+                <span class="menu-title mx-3">IO</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"href="{% url "network" %}">
+                <img src="{% static "icons/network.svg" %}">
+                <span class="menu-title mx-3">Network</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Main content -->
+        <div class="main-panel">
+          <div class="content-wrapper pt-0 mt-0">
+
+            {% block main_content %}
+            {% endblock %}
+
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'js/chart.js/chart.umd.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/jquery/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/progressbar.js/progressbar.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/off-canvas.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/template.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/settings.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/hoverable-collapse.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/todolist.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/jquery.cookie.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/dashboard.js' %}" type="text/javascript"></script>
+</body>
+</html>

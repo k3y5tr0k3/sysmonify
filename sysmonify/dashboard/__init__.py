@@ -1,0 +1,1 @@
+"""A dashboard app package."""

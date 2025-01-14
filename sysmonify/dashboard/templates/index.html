@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="home-tab">
+          <div class="tab-content tab-content-basic pt-0">
+            <div class="tab-pane fade show active">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="statistics-details d-flex align-items-center justify-content-between">
+                    <div>
+                      <p class="statistics-title">Total Processes</p>
+                      <h3 class="rate-percentage">212</h3>
+                    </div>
+                    <div>
+                      <p class="statistics-title">System Load</p>
+                      <h3 class="rate-percentage">2.12</h3>
+                    </div>
+                    <div>
+                      <p class="statistics-title">CPU Cores</p>
+                      <h3 class="rate-percentage">20</h3>
+                    </div>
+                    <div class="d-none d-md-block">
+                      <p class="statistics-title">Total Memory</p>
+                      <h3 class="rate-percentage">32 GiB</h3>
+                    </div>
+                    <div class="d-none d-md-block">
+                      <p class="statistics-title">Disk Capacity</p>
+                      <h3 class="rate-percentage">1 TB</h3>
+                    </div>
+                    <div class="d-none d-md-block">
+                      <p class="statistics-title">Uptime</p>
+                      <h3 class="rate-percentage">7days, 14:47:11</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container-fluid d-flex flex-column vh-100">
+                <div class="row d-flex align-items-stretch">
+
+                  <!-- Column 1 (CPU, Memory, Swap Usage, and Network Usage) -->
+                  <div class="col-12 col-lg-8 d-flex flex-column">
+                    <!-- CPU Utilization -->
+                    <div class="col-12 grid-margin stretch-card flex-grow-1">
+                      <div class="card card-rounded">
+                        <div class="card-body pb-0">
+                          <h4 class="card-title card-title-dash mb-4">CPU Utilization</h4>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <h4 class="text-info">66.66%</h4>
+                            </div>
+                            <div class="col-sm-8">
+                              <div class="status-summary-chart-wrapper pb-4">
+                                <canvas id="status-summary"></canvas>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Memory and Swap Usage -->
+                    <div class="col-12 grid-margin stretch-card flex-grow-1">
+                      <div class="card card-rounded">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="d-flex justify-content-between align-items-center mb-2 mx-md-5 mb-sm-0">
+                                <div class="circle-progress-width">
+                                  <div id="memoryUsageChart" class="progressbar-js-circle pr-2"></div>
+                                </div>
+                                <div>
+                                  <h6 class="mb-2">Memory Usage</h6>
+                                  <h4 class="mb-0 fw-bold">81.11%</h4>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="d-flex justify-content-between align-items-center mx-md-5">
+                                <div class="circle-progress-width">
+                                  <div id="swapUsageChart" class="progressbar-js-circle pr-2"></div>
+                                </div>
+                                <div>
+                                  <h6 class="mb-2">Swap Usage</h6>
+                                  <h4 class="mb-0 fw-bold">9.01%</h4>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Network Usage Chart -->
+                    <div class="col-12 grid-margin stretch-card flex-grow-1 network-usage-chart">
+                      <div class="card card-rounded">
+                        <div class="card-body">
+                          <div class="d-sm-flex justify-content-between align-items-start">
+                            <h4 class="card-title card-title-dash">Network Usage</h4>
+                          </div>
+                          <div class="chartjs-wrapper mt-4">
+                            <canvas id="networkUsageChart" width=""></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Storage Breakdown -->
+                  <div class="col-lg-4 d-flex flex-column">
+                    <div class="row flex-grow">
+                      <div class="col-12 grid-margin stretch-card flex-grow-1">
+                        <div class="card card-rounded">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                  <h4 class="card-title card-title-dash mb-3">Storage Breakdown</h4>
+                                </div>
+                                <div>
+                                  <canvas class="my-auto mt-3 mb-5" id="storageBreakdownChart"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock main_content %}
