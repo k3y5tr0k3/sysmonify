@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap/dataTables.bootstrap4.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/select.dataTables.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    {% block additional_styles %}{% endblock additional_styles %}
     <!-- Favicon -->
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
   </head>
 
   <body>
-    <div class="">
+    <div>
       <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row rounded-end">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
           <!-- Logo -->
@@ -59,14 +60,14 @@
                   <span class="menu-title mx-3">Proccesses</span>
                 </a>
             </li>
-            {% if power %}
+            {# {% if power %} #}
             <li class="nav-item">
                 <a class="nav-link" href="#power">
                   <img src="{% static "icons/power.svg" %}">
                   <span class="menu-title mx-3">Power</span>
                 </a>
             </li>
-            {% endif %}
+            {# {% endif %} #}
             <li class="nav-item nav-category">Hardware</li>
             <li class="nav-item">
               <a class="nav-link"href="{% url "cpu" %}">
@@ -119,10 +120,8 @@
   <script src="{% static 'js/progressbar.js/progressbar.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/off-canvas.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/template.js' %}" type="text/javascript"></script>
-  <script src="{% static 'js/settings.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/hoverable-collapse.js' %}" type="text/javascript"></script>
-  <script src="{% static 'js/todolist.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/jquery.cookie.js' %}" type="text/javascript"></script>
-  <script src="{% static 'js/dashboard.js' %}" type="text/javascript"></script>
+  {% block additional_scripts %}{% endblock additional_scripts %}
 </body>
 </html>
