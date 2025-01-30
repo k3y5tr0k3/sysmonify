@@ -16,11 +16,6 @@ def processes_view(request):
     return render(request, "processes.html")
 
 
-def cpu_view(request):
-    """Processes view."""
-    return render(request, "cpu.html")
-
-
 def memory_view(request):
     """Memory view."""
     return render(request, "memory.html")
