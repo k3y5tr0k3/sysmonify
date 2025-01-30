@@ -3,8 +3,13 @@
 A module containing WebSocket Consumers for the dashboard app.
 """
 
-from channels.generic.websocket import AsyncWebsocketConsumer
 import json
+import logging
+
+from channels.generic.websocket import AsyncWebsocketConsumer
+
+
+logger = logging.getLogger(__name__)
 
 
 class DashboardConsumer(AsyncWebsocketConsumer):
@@ -81,56 +86,6 @@ class ProcessesConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
         system_processes = {"pid": 50, "user": "system-user", "name": 40}
-        await self.send(text_data=json.dumps(system_processes))
-
-    async def disconnect(self, close_code: int) -> None:
-        """Handles WebSocket disconnections.
-
-        Removes the client from the metrics group when the connection is closed.
-
-        Args:
-            close_code (int): The WebSocket close code.
-        """
-        pass
-
-    async def receive(self, json: str) -> None:
-        """Handles incoming messages from the WebSocket client.
-
-        This method processes messages sent by the client. If necessary,
-        it can be extended to handle commands or actions requested by
-        the client.
-
-        Args:
-            json (str): The raw JSON message received from the client.
-
-        Raises:
-            ValueError: If the `text_data` is not valid JSON.
-        """
-        pass
-
-
-class CPUConsumer(AsyncWebsocketConsumer):
-    """WebSocket consumer for handling real-time system CPU updates.
-
-    This consumer allows clients to connect to a WebSocket endpoint
-    and receive live system metrics, such as individual cpu usage and temperatures.
-
-    Methods:
-        connect: Handles a new WebSocket connection.
-        disconnect: Handles WebSocket disconnections.
-        receive: Handles incoming messages from the WebSocket client.
-    """
-
-    async def connect(self) -> None:
-        """Handles a new WebSocket connection.
-
-        The method accepts the WebSocket connection, adds the client
-        to a group for broadcasting metrics, and sends an initial
-        success message.
-        """
-        await self.accept()
-
-        system_processes = {"core_id": 5, "freq": 1400, "temp": 40}
         await self.send(text_data=json.dumps(system_processes))
 
     async def disconnect(self, close_code: int) -> None:

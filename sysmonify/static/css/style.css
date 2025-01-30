@@ -30322,6 +30322,7 @@ thead, tbody tr {
 
 #cpuTempChart {
   height: 240px;
+  max-height: 240px;
 }
 
 .gpu-util-card {
