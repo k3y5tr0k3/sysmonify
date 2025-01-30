@@ -54,7 +54,10 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "templates/shared"),
             "dashboard/templates",
+            "cpu/templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
