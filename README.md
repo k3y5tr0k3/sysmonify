@@ -19,6 +19,7 @@ pip install -r dev-requirements.txt
 Collect Static files
 
 ```bash
+cd sysmonify
 python3 manage.py collectstatic
 ```
 
@@ -31,6 +32,21 @@ daphne -b 0.0.0.0 -p 8000 sysmonify.asgi:application
 
 # Testing
 
-TODO
+Create virtual environment
 
-# Design Notes
+```bash
+python3 -m venv venv
+```
+
+Activate virtual environment
+
+```bash
+pip install -r dev-requirements.txt
+```
+
+Run unit tests
+
+```bash
+cd sysmonify
+python3 manage.py test
+```
