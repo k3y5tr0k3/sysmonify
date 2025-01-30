@@ -146,3 +146,35 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 # Channels
 
 CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
+
+# Logging
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    # Console Output
+    "formatters": {
+        "verbose": {"format": "[%(asctime)s] [%(name)s] [%(levelname)s] [%(message)s]"},
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+            "level": "INFO",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "logs/app.log",
+            "mode": "w",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+    },
+}
