@@ -1,6 +1,6 @@
 """consumers.py.
 
-A module containing WebSocket Consumers for the dashboard app.
+A module containing WebSocket Consumers for the CPU app.
 
 Classes:
     `CPUConsumer`:

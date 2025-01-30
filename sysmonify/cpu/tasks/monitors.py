@@ -6,24 +6,22 @@ system performance metrics, such as CPU utilization, frequency, and temperature.
 
 Classes:
     - CPUFreqMonitor:
-        A class for continuously monitoring real-time statistics, such as CPU usage
-        percentage and load average.
+        A class for retrieving up-to-date cpu frequency measurements.
     - CPUThermalMonitor:
         A class to fetch thermal data for the CPU, including sensor readings.
 
 Usage:
-    This module is intended to be used as part of the background task system for
-    periodic monitoring or on-demand requests. It can be integrated with task
-    queues like Celery for scheduled data collection or used standalone in scripts.
+    This module is intended to be used as with websockets for real-time monitoring or
+    on-demand requests.
 
 Examples:
-    - Fetching CPU data:
-        monitor = CPUData()
-        cpu_details = monitor.get_cpu_info()
+    - Fetching CPU core frequencies:
+        monitor = CPUFreqMonitor()
+        cpu_details = monitor.get_metrics()
 
     - Fetching thermal zone temperatures:
         thermal = CPUThermalMonitor()
-        cpu_temp = thermal.get_cpu_temperature()
+        cpu_temp = thermal.get_metrics()
 
 Dependencies:
     - psutil:
@@ -60,7 +58,7 @@ class CPUFreqMonitor(Monitor):
         get_metrics() -> dict:
             Retrieves the current CPU frequencies for all cores on the system.
             Returns a dictionary where the keys are the CPU core numbers and
-            the values are the current frequency in Hz.
+            the values are the current frequency in MHz.
     """
 
     async def get_metrics(self) -> dict:
@@ -78,9 +76,14 @@ class CPUFreqMonitor(Monitor):
         Raises:
             AttributeError:
                 If `self.cpu_freq` is not set or does not contain valid frequency data.
+            RuntimeError:
+                If for some reason we cannot retrieve CPU frequencies.
             TypeError:
                 If the elements in `self.cpu_freq` are not iterable or lack the
                 `current` attribute.
+            Exception:
+                If an unexpected exception is raised during retrieval of CPU frequency
+                data.
         """
         current_freq = {}
 
@@ -128,7 +131,7 @@ class CPUThermalMonitor(Monitor):
         get_metrics() -> dict:
             Retrieves the current CPU package temperature. Returns a dictionary where
             the keys are the CPU temperature sensor labels and the values are the
-            current temperature in degrees celsius. Current only support CPU package
+            current temperature in degrees celsius. Currently only supports CPU package
             temp.
 
     """
@@ -147,6 +150,10 @@ class CPUThermalMonitor(Monitor):
         Raises:
             AttributeError:
                 If the system does not support temperature readings
+            TypeError:
+                Am invalid type is returned from `psutils.sensors_temperatures()`.
+            Exception:
+                If an unexpected error occurs during retrieval of CPU thermal data.
         """
         temps = {"package": "Unknown"}
 
@@ -160,9 +167,6 @@ class CPUThermalMonitor(Monitor):
 
         except AttributeError:
             raise AttributeError("Temperature readings not supported on this system.")
-
-        except KeyError as e:
-            raise KeyError(f"Unexpected key error: {str(e)}") from e
 
         except TypeError as e:
             raise TypeError(

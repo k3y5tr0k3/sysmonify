@@ -1,6 +1,6 @@
 """urls.py.
 
-URL routing configuration for the dashboard app.
+URL routing configuration for the CPU app.
 """
 
 from django.urls import path

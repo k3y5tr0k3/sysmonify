@@ -9,7 +9,6 @@ The class contains methods to gather various statistics related to the CPU, such
 - CPU architecture and other CPU features
 - Cache sizes (L1, L2, L3)
 - CPU min, max and turbo frequencies
-- Supported CPU flags and power management features
 
 The `CPUDetails` class leverages libraries like `psutil` and `cpuinfo` to query cpu
 details.
@@ -36,8 +35,7 @@ class CPUDetails(Details):
 
     This class gathers a wide range of CPU-related information, such as vendor, model,
     architecture, core count, cache sizes, min/max frequencies, and more. It can be used
-    to retrieve information about the CPU's capabilities, power management, and flags
-    supported by the processor.
+    to retrieve information about the CPU's capabilities.
 
     Attributes:
         - `_raw_cpu_info` (dict):
@@ -57,8 +55,8 @@ class CPUDetails(Details):
 
     Example usage:
         cpu_details = CPUDetails()
-        cpu_info = cpu_details.get_cpu_info()
-        print(cpu_info)
+        details = cpu_details.get_details()
+        print(details)
 
     Note:
         This class uses the `psutil` and `cpuinfo` libraries to gather system data and
@@ -67,7 +65,7 @@ class CPUDetails(Details):
     """
 
     def __init__(self) -> None:
-        """Initializes the class and compiles CPU-related data into easily accessible class attributes."""
+        """Default initializer."""
         try:
             self._raw_cpu_info = cpuinfo.get_cpu_info()
         except Exception:

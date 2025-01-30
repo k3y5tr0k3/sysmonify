@@ -1,6 +1,6 @@
 """routing.py.
 
-Routing configuration for dashboard app channels.
+Routing configuration for CPU app channels.
 """
 
 from django.urls import re_path
