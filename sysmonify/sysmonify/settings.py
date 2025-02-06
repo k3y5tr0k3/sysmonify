@@ -58,6 +58,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, "templates/shared"),
             "dashboard/templates",
             "cpu/templates",
+            "disk/templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -124,7 +125,11 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static/"),)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "cpu/static"),
+    os.path.join(BASE_DIR, "disk/static"),
+]
 
 WHITENOISE_MIMETYPES = {
     ".css": "text/css",
@@ -153,7 +158,6 @@ CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    # Console Output
     "formatters": {
         "verbose": {"format": "[%(asctime)s] [%(name)s] [%(levelname)s] [%(message)s]"},
     },

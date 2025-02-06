@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path("", include("dashboard.urls")),
     path("", include("cpu.urls")),
+    path("", include("disk.urls")),
 ]
