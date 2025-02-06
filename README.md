@@ -26,7 +26,6 @@ python3 manage.py collectstatic
 Run development sever
 
 ```bash
-cd sysmonify
 daphne -b 0.0.0.0 -p 8000 sysmonify.asgi:application
 ```
 
