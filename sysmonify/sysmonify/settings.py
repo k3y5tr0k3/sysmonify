@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Sysmonify
     "dashboard",
     "cpu",
+    "disk",
 ]
 
 MIDDLEWARE = [
