@@ -21,11 +21,11 @@ logger = logging.getLogger(__name__)
 
 
 class DiskDetails(Details):
-    """A class to retrieving detailed information about the disks and their partitions.
+    """A class for retrieving detailed information about the disks and their partitions.
 
     The class interacts with system files and tools such as `/sys`, `lsblk`, and others
     to gather essential disk and partition-related data, including sizes, filesystem
-    types, mount points, and additional metadata.
+    types, and additional metadata.
 
     Attributes:
         LSBLK_HEADERS (list):
@@ -66,12 +66,21 @@ class DiskDetails(Details):
         """Executes the 'lsblk' command and returns block device information as a Python dictionary.
 
         Returns:
-            dict: Parsed JSON output from 'lsblk' containing block device details.
-            None: If an error occurs during execution.
+            dict:
+                Parsed JSON output from 'lsblk' containing block device details.
 
-        Errors:
-            - Captures and logs any errors from the 'lsblk' command.
-            - Returns None if 'lsblk' is not found or fails to execute.
+        Raises:
+            FileNotFoundError:
+                If the 'lsblk' command is not found, indicating it may not be installed.
+
+            subprocess.CalledProcessError:
+                If 'lsblk' fails to execute or returns a non-zero exit code.
+
+            json.JSONDecodeError:
+                If the output from 'lsblk' is not valid JSON and cannot be parsed.
+
+            Exception:
+                For any other unexpected errors during execution.
         """
         disk_details = {}
 
@@ -107,12 +116,13 @@ class DiskDetails(Details):
         return disk_details.get("blockdevices")
 
     def _is_physical_disk(self, block_device_name: str) -> bool:
-        """Check if the given block device is a physical disk.
+        """Checks if the given block device is a physical disk.
 
-        Constructs an expected symbolic link for a block device then uses linux built-in
-        `readlink` command to return the actual location of the device. If the device
-        path contains a directory named "virtual" (or if it does not exist) we assume it
-        is a virtual disk, otherwise we can assume it is a physical device.
+        Constructs an expected symbolic link for a block device given its name then uses
+        linux built-in `readlink` command to return the actual location of the device.
+        If the device path contains a directory named "virtual" (or if it does not
+        exist) we assume it is a virtual disk, otherwise we can assume it is a physical
+        device.
 
         Args:
             block_device_name (str):
@@ -175,16 +185,16 @@ class DiskDetails(Details):
         """Filters and returns a list of physical disk devices from a given list of raw block devices.
 
         This method iterates through a list of block devices, checks if each device is
-        of type "disk," and then verifies whether it is a physical disk using
+        of type 'disk' and then verifies whether it is a physical disk using
         `_is_physical_disk()`. Only physical disks are included in the returned list.
 
-        Args:`
-            `raw_block_devices` (list):
+        Args:
+            raw_block_devices (list):
                 A list of dictionaries representing block devices, where each
                 dictionary contains at least a "type" and "name" key.
 
         Returns:
-            `list`:
+            list:
                 A list of dictionaries representing physical disks.
         """
         physical_disks = []
@@ -202,12 +212,12 @@ class DiskDetails(Details):
     async def get_details(self) -> dict:
         """Retrieve and return a dictionary containing detail information about disks and their partitions.
 
-        Gathers disk and partition details for all disks, consolidates it and returns a
-        dictionary containing all relevant information such as device name, vendor,
-        model, size, filesystem type and more.
+        Gathers disk and partition details for all physical disks, consolidates it and
+        returns a dictionary containing all relevant information such as device name,
+        vendor, model, size, filesystem type and more.
 
         Returns:
-            `dict`:
+            dict:
                 A dictionary containing all relevant information related to disks and
                 their partitions.
         """
