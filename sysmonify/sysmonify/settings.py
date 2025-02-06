@@ -135,6 +135,7 @@ STATICFILES_DIRS = [
 WHITENOISE_MIMETYPES = {
     ".css": "text/css",
     ".js": "text/javascript",
+    ".svg": "image/svg+xml",
 }
 
 WHITE_NOISE_FINDERS = True
