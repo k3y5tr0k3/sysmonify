@@ -30285,14 +30285,7 @@ thead, tbody tr {
   table-layout: fixed;
 }
 
-.processes-table-body {
-  display: block;
-  overflow-y: auto;
-  table-layout: fixed;
-  max-height: 450px;
-}
-
-.net-connections-table-body {
+.scrollable-table-body {
   display: block;
   overflow-y: auto;
   table-layout: fixed;
@@ -30327,4 +30320,13 @@ thead, tbody tr {
 
 .gpu-util-card {
   height: 285px;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+#dropdownMenuButton {
+  background-color: rgba(64, 224, 208, 0.7);
+  border-color: rgba(64, 224, 208, 0.7);
 }
