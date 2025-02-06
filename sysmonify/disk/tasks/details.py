@@ -60,8 +60,6 @@ class DiskDetails(Details):
             "ROTA",
         ]
 
-    def _get_disk_space_utilization(self) -> dict: ...
-
     def _get_raw_block_devices(self) -> dict:
         """Executes the 'lsblk' command and returns block device information as a Python dictionary.
 
