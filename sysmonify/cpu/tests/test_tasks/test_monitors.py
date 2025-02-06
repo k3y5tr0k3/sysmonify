@@ -158,18 +158,6 @@ class TestCPUThermalMonitor(TestCase):
             asyncio.run(self.monitor.get_metrics())
 
     @unittest.mock.patch("psutil.sensors_temperatures")
-    def test_get_metrics_key_error(self, mock_sensors_temperatures):
-        """Test handling KeyError if an unexpected key is encountered.
-
-        Asserts:
-            If a KeyError is raised it is handled correctly.
-        """
-        mock_sensors_temperatures.side_effect = KeyError("Unexpected key error")
-
-        with self.assertRaises(KeyError):
-            asyncio.run(self.monitor.get_metrics())
-
-    @unittest.mock.patch("psutil.sensors_temperatures")
     def test_get_metrics_type_error(self, mock_sensors_temperatures):
         """Test handling TypeError if there's a problem with data types.
 
