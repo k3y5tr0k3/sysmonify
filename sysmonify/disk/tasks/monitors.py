@@ -165,62 +165,103 @@ class DiskIOMonitor(Monitor):
                 values are dictionaries containing:
                     - 'read_speed' (float): Read speed in MB/s.
                     - 'write_speed' (float): Write speed in MB/s.
+
+        Raises:
+            ValueError:
+                If time delta is zero or negative, preventing division errors.
+
+            KeyError:
+                If expected keys are missing from sector data.
+
+            Exception:
+                For any other unexpected errors.
         """
         current_disks_speeds = {}
-        current_disks_sectors = self._get_current_disks_sectors()
-        current_timestamp = datetime.datetime.now()
-        time_delta = current_timestamp - self._previous_timestamp
-        time_delta_seconds = time_delta.total_seconds()
 
-        for disk_name in self._disks:
-            if disk_name not in self._previous_disks_sectors:
-                continue
+        try:
+            current_disks_sectors = self._get_current_disks_sectors()
+            current_timestamp = datetime.datetime.now()
+            time_delta = current_timestamp - self._previous_timestamp
+            time_delta_seconds = time_delta.total_seconds()
 
-            current_disk_sectors = current_disks_sectors.get(disk_name, {})
-            current_sectors_read = current_disk_sectors.get("read", 0)
-            current_sectors_written = current_disk_sectors.get("written", 0)
+            if time_delta_seconds <= 0:
+                raise ValueError(
+                    "Invalid time delta: time must be strictly increasing."
+                )
 
-            previous_disk_sectors = self._previous_disks_sectors[disk_name]
-            read_sectors_delta = current_sectors_read - previous_disk_sectors.get(
-                "read", 0
-            )
-            written_sectors_delta = current_sectors_written - previous_disk_sectors.get(
-                "written", 0
-            )
+            for disk_name in self._disks:
+                if disk_name not in self._previous_disks_sectors:
+                    continue
 
-            read_delta_mb = self._sectors_to_megabytes(sectors=read_sectors_delta)
-            written_delta_mb = self._sectors_to_megabytes(sectors=written_sectors_delta)
+                try:
+                    current_disk_sectors = current_disks_sectors.get(disk_name, {})
+                    current_sectors_read = current_disk_sectors.get("read", 0)
+                    current_sectors_written = current_disk_sectors.get("written", 0)
 
-            read_mbps = (
-                read_delta_mb / time_delta_seconds if read_delta_mb != 0 else 0.0
-            )
-            written_mbps = (
-                written_delta_mb / time_delta_seconds if written_delta_mb != 0 else 0.0
-            )
+                    previous_disk_sectors = self._previous_disks_sectors[disk_name]
+                    read_sectors_delta = (
+                        current_sectors_read - previous_disk_sectors.get("read", 0)
+                    )
+                    written_sectors_delta = (
+                        current_sectors_written
+                        - previous_disk_sectors.get("written", 0)
+                    )
 
-            if disk_name not in self._ema_speeds:
-                self._ema_speeds[disk_name] = {
-                    "read_speed": read_mbps,
-                    "write_speed": written_mbps,
-                }
+                    read_delta_mb = self._sectors_to_megabytes(
+                        sectors=read_sectors_delta
+                    )
+                    written_delta_mb = self._sectors_to_megabytes(
+                        sectors=written_sectors_delta
+                    )
 
-            self._ema_speeds[disk_name]["read_speed"] = (
-                self._smoothing_factor * read_mbps
-                + (1 - self._smoothing_factor)
-                * self._ema_speeds[disk_name]["read_speed"]
-            )
-            self._ema_speeds[disk_name]["write_speed"] = (
-                self._smoothing_factor * written_mbps
-                + (1 - self._smoothing_factor)
-                * self._ema_speeds[disk_name]["write_speed"]
-            )
+                    read_mbps = (
+                        read_delta_mb / time_delta_seconds
+                        if read_delta_mb != 0
+                        else 0.0
+                    )
+                    written_mbps = (
+                        written_delta_mb / time_delta_seconds
+                        if written_delta_mb != 0
+                        else 0.0
+                    )
 
-            current_disks_speeds[disk_name] = {
-                "read_speed": self._ema_speeds[disk_name]["read_speed"],
-                "write_speed": self._ema_speeds[disk_name]["write_speed"],
-            }
+                    if disk_name not in self._ema_speeds:
+                        self._ema_speeds[disk_name] = {
+                            "read_speed": read_mbps,
+                            "write_speed": written_mbps,
+                        }
 
-        self._previous_disks_sectors = current_disks_sectors
-        self._previous_timestamp = current_timestamp
+                    self._ema_speeds[disk_name]["read_speed"] = (
+                        self._smoothing_factor * read_mbps
+                        + (1 - self._smoothing_factor)
+                        * self._ema_speeds[disk_name]["read_speed"]
+                    )
+                    self._ema_speeds[disk_name]["write_speed"] = (
+                        self._smoothing_factor * written_mbps
+                        + (1 - self._smoothing_factor)
+                        * self._ema_speeds[disk_name]["write_speed"]
+                    )
+
+                    current_disks_speeds[disk_name] = {
+                        "read_speed": self._ema_speeds[disk_name]["read_speed"],
+                        "write_speed": self._ema_speeds[disk_name]["write_speed"],
+                    }
+
+                except KeyError as e:
+                    logger.exception(
+                        f"KeyError: Missing expected key in sector data for {disk_name}: {e}"
+                    )
+                except Exception as e:
+                    logger.exception(
+                        f"Unexpected error processing disk {disk_name}: {e}"
+                    )
+
+            self._previous_disks_sectors = current_disks_sectors
+            self._previous_timestamp = current_timestamp
+
+        except ValueError as e:
+            logger.error(f"ValueError: {e}")
+        except Exception as e:
+            logger.exception(f"Unexpected error in get_metrics: {e}")
 
         return current_disks_speeds
