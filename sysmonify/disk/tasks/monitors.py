@@ -15,7 +15,6 @@ Examples:
 
 import logging
 import datetime
-import time
 
 from sysmonify.core.tasks import Monitor
 
@@ -225,11 +224,3 @@ class DiskIOMonitor(Monitor):
         self._previous_timestamp = current_timestamp
 
         return current_disks_speeds
-
-
-if __name__ == "__main__":
-    disks = ["nvme0n1"]
-    monitor = DiskIOMonitor(disks=disks)
-    while True:
-        print(monitor.get_metrics())
-        time.sleep(1)
