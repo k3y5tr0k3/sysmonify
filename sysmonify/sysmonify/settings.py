@@ -23,20 +23,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # Django
+    # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third-party
+    # Third-party apps
     "channels",
-    # Sysmonify
+    # Sysmonify project apps
     "dashboard",
     "cpu",
     "disk",
+    "gpu",
 ]
+
+# Middleware definition
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -60,6 +63,7 @@ TEMPLATES = [
             "dashboard/templates",
             "cpu/templates",
             "disk/templates",
+            "gpu/templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -130,6 +134,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "cpu/static"),
     os.path.join(BASE_DIR, "disk/static"),
+    os.path.join(BASE_DIR, "gpu/static"),
 ]
 
 WHITENOISE_MIMETYPES = {

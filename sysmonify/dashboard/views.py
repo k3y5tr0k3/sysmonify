@@ -21,11 +21,6 @@ def memory_view(request):
     return render(request, "memory.html")
 
 
-def gpu_view(request):
-    """GPU view."""
-    return render(request, "gpu.html")
-
-
 def network_view(request):
     """Network view."""
     return render(request, "network.html")
