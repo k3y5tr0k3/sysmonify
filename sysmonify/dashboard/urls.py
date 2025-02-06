@@ -12,5 +12,4 @@ urlpatterns = [
     path("memory/", views.memory_view, name="memory"),
     path("gpu/", views.gpu_view, name="gpu"),
     path("network/", views.network_view, name="network"),
-    path("io/", views.io_view, name="io"),
 ]

@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome/font-awesome.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/typicons/typicons.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/vendor.bundle.base.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap-datepicker.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/bootstrap/dataTables.bootstrap4.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/select.dataTables.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     {% block additional_styles %}{% endblock additional_styles %}
@@ -21,9 +20,10 @@
 
   <body>
     <div>
+
+      <!-- Logo -->
       <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row rounded-end">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-          <!-- Logo -->
           <div>
             <a class="navbar-brand brand-logo container d-flex align-items-center" href="{% url "index" %}">
               <img src="{% static 'images/sysmonify.svg' %}" alt="logo" />
@@ -33,13 +33,6 @@
               <img src="{% static 'images/sysmonify.svg' %}" alt="logo" />
             </a>
           </div>
-        </div>
-
-        <div class="p-1 m-1 position-absolute top-0 end-0 p-3">
-          <!-- Minimize Button (Top-right corner) -->
-          <button class="btn btn-minimize m-0" onclick="minimizeWindow()">_</button>
-          <!-- Close Button -->
-          <button class="btn btn-close m-0" onclick="window.close()"></button>
         </div>
       </nav>
 
@@ -60,14 +53,6 @@
                   <span class="menu-title mx-3">Proccesses</span>
                 </a>
             </li>
-            {# {% if power %} #}
-            <li class="nav-item">
-                <a class="nav-link" href="#power">
-                  <img src="{% static "icons/power.svg" %}">
-                  <span class="menu-title mx-3">Power</span>
-                </a>
-            </li>
-            {# {% endif %} #}
             <li class="nav-item nav-category">Hardware</li>
             <li class="nav-item">
               <a class="nav-link"href="{% url "cpu" %}">
@@ -88,9 +73,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url "io" %}">
+              <a class="nav-link" href="{% url "disks" %}">
                 <img src="{% static "icons/io.svg" %}">
-                <span class="menu-title mx-3">IO</span>
+                <span class="menu-title mx-3">Disks</span>
               </a>
             </li>
             <li class="nav-item">
@@ -116,9 +101,10 @@
 
   <!-- Scripts -->
   <script src="{% static 'js/chart.js/chart.umd.js' %}" type="text/javascript"></script>
-  <script src="{% static 'js/jquery/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/jquery/jquery-3.7.1.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/progressbar.js/progressbar.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/jquery.cookie.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
   {% block additional_scripts %}{% endblock additional_scripts %}
 </body>
 </html>

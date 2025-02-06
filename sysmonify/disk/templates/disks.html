@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+
+<!-- Disk choice dropdown -->
+<div class="row">
+  <div class="d-flex align-items-center  m-2 px-4">
+    <h6 class="pt-2">Select Disk: </h6>
+    <div class="dropdown mx-2 w-75">
+      <button
+        id="dropdownMenuButton"
+        class="btn btn-sm btn-primary dropdown-toggle d-flex justify-content-between rounded-2 w-25"
+        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div id="dropDownButtonText" class="text-truncate"></div>
+        <img src="{% static 'icons/caret-down.svg' %}" style="height: 15px; width: auto; margin-left: 10px;">
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-8 d-flex flex-column">
+    <div class="row flex-grow">
+
+      <!-- Disk Utilization Chart -->
+      <div class="container-fluid d-flex flex-column vh-100">
+        <div class="row d-flex align-items-stretch">
+          <div class="col-12 d-flex flex-column">
+            <div class="col-12 grid-margin stretch-card flex-grow-1">
+              <div class="card card-rounded cpi-util-card">
+                <div class="card-body p-1 pb-0">
+                  <div class="d-flex justify-content-between p-2">
+                    <h6 class="card-title card-title-dash">IO</h4>
+                    <h4 id="diskUtilText" class="card-title card-title-dash">Read 1.6 MB/s - Write 3.6 MB/s</h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 h-100">
+                      <div class="status-summary-chart-wrapper pb-0 h-100">
+                        <canvas id="diskUtilizationChart"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disk details -->
+        <div class="row d-flex align-items-stretch">
+          <div class="col-12 d-flex flex-column">
+            <div class="row d-flex align-items-stretch">
+              <div class="col-12 d-flex flex-column">
+                <div class="col-12 grid-margin stretch-card flex-grow-1">
+                  <div class="card card-rounded cpu-util-card">
+                    <div class="card-body p-1 pb-0">
+                      <div class="d-flex justify-content-between p-2">
+                        <h6 class="card-title card-title-dash">Partitions</h4>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12 h-100">
+                          <div class="table-responsive">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col" class="col-1">No.</th>
+                                  <th scope="col" class="col-2">Label</th>
+                                  <th scope="col" class="col-2">Type</th>
+                                  <th scope="col" class="col-1">Size</th>
+                                  <th scope="col" class="col-3">Contents</th>
+                                  <th scope="col" class="col-3">UUID</th>
+                                </tr>
+                              </thead>
+                              <tbody id="partitionTableBody" class="scrollable-table-body"></tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Storage Breakdown -->
+  <div class="col-4 d-flex flex-column">
+    <div class="row flex-grow">
+      <div class="container-fluid d-flex flex-column vh-100">
+        <div class="row d-flex align-items-stretch">
+          <div class="col-12 d-flex flex-column">
+            <div class="col-12 grid-margin stretch-card flex-grow-1">
+              <div class="card card-rounded">
+                <div class="card-body p-1 pb-0">
+                  <div class="d-flex justify-content-between">
+                    <h4 class="card-title card-title-dash px-2 pt-3">Details</h4>
+                  </div>
+                  <hr class="mx-2 pt-0"/>
+                  <div class="cpu-details-card">
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Vendor: </h6>
+                      <p id="vendor"></p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Model: </h6>
+                      <p id="model"></p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Size: </h6>
+                      <p id="diskSize"></p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Type: </h6>
+                      <p id="diskType"></p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Serial: </h6>
+                      <p id="serial"></p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <h6 class="cpu-detail-heading">Partition Scheme: </h6>
+                      <p id="partitionScheme"></p>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock main_content %}
+
+{% block additional_scripts %}
+<script src="{% static 'js/disk.js' %}" type="text/javascript"></script>
+{% endblock additional_scripts %}

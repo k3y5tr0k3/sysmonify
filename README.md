@@ -13,6 +13,10 @@ python3 -m venv venv
 Activate virtual environment
 
 ```bash
+source ./venv/bin/activate
+```
+
+```bash
 pip install -r dev-requirements.txt
 ```
 
@@ -26,7 +30,6 @@ python3 manage.py collectstatic
 Run development sever
 
 ```bash
-cd sysmonify
 daphne -b 0.0.0.0 -p 8000 sysmonify.asgi:application
 ```
 

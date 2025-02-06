@@ -29,8 +29,3 @@ def gpu_view(request):
 def network_view(request):
     """Network view."""
     return render(request, "network.html")
-
-
-def io_view(request):
-    """IO view."""
-    return render(request, "io.html")
