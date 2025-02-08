@@ -14,6 +14,7 @@ from dashboard.routing import websocket_urlpatterns as dashboard_websocket_urlpa
 from sysmonify.core.routing import websocket_urlpatterns as test_websocket_urlpatterns
 from cpu.routing import websocket_urlpatterns as cpu_websocket_urlpatterns
 from disk.routing import websocket_urlpatterns as disk_websocket_urlpatterns
+from gpu.routing import websocket_urlpatterns as gpu_websocket_urlpatterns
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sysmonify.settings")
 
@@ -26,6 +27,7 @@ application = ProtocolTypeRouter(
                 + test_websocket_urlpatterns
                 + cpu_websocket_urlpatterns
                 + disk_websocket_urlpatterns
+                + gpu_websocket_urlpatterns
             )
         ),
     }
