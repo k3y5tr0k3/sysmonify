@@ -39,7 +39,6 @@ class TestGPUDetails(TestCase):
 
         details = await self.gpu_details.get_details()
 
-        # Assert that details is a dictionary and contains a key for GPU index "0"
         self.assertIsInstance(details, dict)
         self.assertIn("0", details)
         gpu_detail = details["0"]
