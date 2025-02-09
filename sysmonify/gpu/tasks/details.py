@@ -23,7 +23,7 @@ class GPUDetails(Details):
             gpu_details = GPUDetails()
             gpu_info = gpu_details.get_details()
             print(gpu_info[0]['vendor'])  # Output: 'NVIDIA'
-            print(gpu_info[0]['min_power'])   # Output: '5.00 W'
+            print(gpu_info[0]['min_power'])   # Output: '5.00'
     """
 
     def __init__(self) -> None:
@@ -41,7 +41,7 @@ class GPUDetails(Details):
     async def get_details(self) -> dict:
         """Gather details about all GPUs on the system and return the details in a dictionary.
 
-        Gathers a list of GPU vendors, for GPUs installed in the system, and then use
+        Gathers a list of GPU details, for GPUs installed in the system, and then use
         vendor specific subprocesses to gather details for each GPU.
 
         This method returns key details about the system's CPU, including:
@@ -49,19 +49,20 @@ class GPUDetails(Details):
         - Vendor (e.g., NVIDIA, AMD)
         - Model (e.g., NVIDIA GeForce RTX™ 4050 Laptop GPU)
         - UUID (e.g., GPU-c6fd5115-f7fc-73ba-4862-000000000)
-        - Total VRAM (e.g., 6141 MiB)
+        - Total VRAM (e.g., 6141)
         - Driver version (e.g., 550.107.02)
-        - Min Power (e.g., 5.00 W)
-        - Max Power (e.g., 50.00 W)
+        - Min Power (e.g., 5.00)
+        - Max Power (e.g., 50.00)
 
         Returns:
             dict: A dictionary of dictionaries with the following format:
             {
-                gpu_index: {
-                    vendor: vendor,
-                    model: model,
+                "0": {
+                    "vendor": "NVIDIA",
+                    "model": "NVIDIA GeForce RTX™ 4050 Laptop GPU",
                     ...
                 },
+                "1": {...},
                 ...
             }
 
