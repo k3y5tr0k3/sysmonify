@@ -53,11 +53,11 @@ class GPUMonitor(Monitor):
             dict: A dictionary of dictionaries with the following format:
             {
                 "0": {
-                    "gpu_utilization": "10 %",
-                    "memory_utilization": "10 %",
+                    "gpu_utilization": "10",
+                    "memory_utilization": "10",
                     "temperature": "43",
-                    "memory_used": "894 MiB",
-                    "power_draw": "5.91 W"
+                    "memory_used": "894",
+                    "power_draw": "5.91"
                 },
                 ...
             }
