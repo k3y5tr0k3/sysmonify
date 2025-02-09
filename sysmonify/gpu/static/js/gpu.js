@@ -16,15 +16,6 @@
         let gpuUtilDatasets = [];
         let gpuUtilText = document.getElementById("gpuUtilText")
 
-        var graphGradient = document.getElementById("gpuTempChart").getContext('2d');
-        var graphGradient2 = document.getElementById("gpuTempChart").getContext('2d');
-        var saleGradientBg = graphGradient.createLinearGradient(5, 0, 5, 100);
-        saleGradientBg.addColorStop(0, 'rgba(26, 115, 232, 0.18)');
-        saleGradientBg.addColorStop(1, 'rgba(26, 115, 232, 0.02)');
-        var saleGradientBg2 = graphGradient2.createLinearGradient(100, 0, 50, 150);
-        saleGradientBg2.addColorStop(0, 'rgba(0, 208, 255, 0.19)');
-        saleGradientBg2.addColorStop(1, 'rgba(0, 208, 255, 0.03)');
-
         if ($("#gpuUtilizationChart").length) {
             const ctx = document.getElementById('gpuUtilizationChart');
 
