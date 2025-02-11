@@ -18,7 +18,7 @@ from network.tasks.utils import get_physical_network_interfaces, IP
 logger = logging.getLogger(__name__)
 
 
-class NetworkMonitor(Monitor):
+class NetworkStatsMonitor(Monitor):
     """A class for retrieving real-time network statistic for all network interfaces on the system.
 
     Methods:
