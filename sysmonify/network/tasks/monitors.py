@@ -8,10 +8,14 @@ Classes:
         A class for retrieving real-time network statistics.
 """
 
+import logging
 import datetime
 
 from sysmonify.core.tasks import Monitor
 from network.tasks.utils import get_physical_network_interfaces, IP
+
+
+logger = logging.getLogger(__name__)
 
 
 class NetworkMonitor(Monitor):
@@ -53,42 +57,53 @@ class NetworkMonitor(Monitor):
         current_timestamp = datetime.datetime.now()
 
         for interface in interfaces:
-            current_network_stats[interface] = await IP.get_interface_stats(
-                interface_name=interface
-            )
-
-            if self._previous_network_stats.get(interface, None):
-                rx_bytes_delta = (
-                    current_network_stats[interface]["rx"]["bytes"]
-                    - self._previous_network_stats[interface]["rx"]["bytes"]
-                )
-                tx_bytes_delta = (
-                    current_network_stats[interface]["tx"]["bytes"]
-                    - self._previous_network_stats[interface]["tx"]["bytes"]
-                )
-                rx_dropped_delta = (
-                    current_network_stats[interface]["rx"]["dropped"]
-                    - self._previous_network_stats[interface]["rx"]["dropped"]
-                )
-                tx_dropped_delta = (
-                    current_network_stats[interface]["tx"]["dropped"]
-                    - self._previous_network_stats[interface]["tx"]["dropped"]
+            try:
+                current_network_stats[interface] = await IP.get_interface_stats(
+                    interface_name=interface
                 )
 
-                seconds = (current_timestamp - self._previous_timestamp).seconds
-                rx_mbps = (
-                    rx_bytes_delta / 1024 / 1024 / seconds if rx_bytes_delta > 0 else 0
-                )
-                tx_mbps = (
-                    tx_bytes_delta / 1024 / 1024 / seconds if tx_bytes_delta > 0 else 0
-                )
+                if self._previous_network_stats.get(interface, None):
+                    rx_bytes_delta = (
+                        current_network_stats[interface]["rx"]["bytes"]
+                        - self._previous_network_stats[interface]["rx"]["bytes"]
+                    )
+                    tx_bytes_delta = (
+                        current_network_stats[interface]["tx"]["bytes"]
+                        - self._previous_network_stats[interface]["tx"]["bytes"]
+                    )
+                    rx_dropped_delta = (
+                        current_network_stats[interface]["rx"]["dropped"]
+                        - self._previous_network_stats[interface]["rx"]["dropped"]
+                    )
+                    tx_dropped_delta = (
+                        current_network_stats[interface]["tx"]["dropped"]
+                        - self._previous_network_stats[interface]["tx"]["dropped"]
+                    )
 
-                metrics[interface] = {
-                    "rx_mbps": rx_mbps,
-                    "tx_mbps": tx_mbps,
-                    "rx_dropped": rx_dropped_delta,
-                    "tx_dropped": tx_dropped_delta,
-                }
+                    seconds = (current_timestamp - self._previous_timestamp).seconds
+                    rx_mbps = (
+                        rx_bytes_delta / 1024 / 1024 / seconds
+                        if rx_bytes_delta > 0
+                        else 0
+                    )
+                    tx_mbps = (
+                        tx_bytes_delta / 1024 / 1024 / seconds
+                        if tx_bytes_delta > 0
+                        else 0
+                    )
+
+                    metrics[interface] = {
+                        "rx_mbps": rx_mbps,
+                        "tx_mbps": tx_mbps,
+                        "rx_dropped": rx_dropped_delta,
+                        "tx_dropped": tx_dropped_delta,
+                    }
+
+            except Exception as e:
+                logger.exception(
+                    "An error occurred while retrieving metric for network "
+                    f"interface `{interface}`. {e}"
+                )
 
         self._previous_timestamp = current_timestamp
         self._previous_network_stats = current_network_stats

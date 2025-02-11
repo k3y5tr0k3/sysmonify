@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 
 def get_physical_network_interfaces() -> set:
-    """Retrieves a set of physical network interfaces on the system.
+    """Retrieves a set of physical network interface names on the system.
 
     Gathers a list of interface names based on directories present in `/sys/class/net/`
     and then filters out interfaces where `/sys/class/net/{interface_name}/device` does
@@ -38,12 +38,21 @@ def get_physical_network_interfaces() -> set:
         set[str]:
             A set of physical network interface names.
     """
-    interfaces = os.listdir("/sys/class/net/")
-    physical_interfaces = {
-        interface
-        for interface in interfaces
-        if os.path.exists(f"/sys/class/net/{interface}/device")
-    }
+    physical_interfaces = {}
+
+    try:
+        interfaces = os.listdir("/sys/class/net/")
+        physical_interfaces = {
+            interface
+            for interface in interfaces
+            if os.path.exists(f"/sys/class/net/{interface}/device")
+        }
+
+    except Exception as e:
+        logger.exception(
+            "Error occurred while retrieving a list of physical network interface "
+            f"names. {e}"
+        )
     return physical_interfaces
 
 
