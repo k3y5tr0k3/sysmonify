@@ -104,7 +104,7 @@ class TestNetworkConnectionsMonitor(unittest.TestCase):
                 "state": "N/A",
                 "local_address": "[::]:1716",
                 "foreign_address": "[::]:0",
-                "send_bytes": 0,
+                "sent_bytes": 0,
                 "received_bytes": 0,
                 "inode": "459876",
             },
@@ -115,7 +115,7 @@ class TestNetworkConnectionsMonitor(unittest.TestCase):
                 "state": "ESTABLISHED",
                 "local_address": "[::]:1716",
                 "foreign_address": "[::]:0",
-                "send_bytes": 0,
+                "sent_bytes": 0,
                 "received_bytes": 0,
                 "inode": "512387",
             },
@@ -131,7 +131,7 @@ class TestNetworkConnectionsMonitor(unittest.TestCase):
         self.assertEqual(connection["state"], "N/A")
         self.assertEqual(connection["local_address"], "[::]:1716")
         self.assertEqual(connection["foreign_address"], "[::]:0")
-        self.assertEqual(connection["send_bytes"], 0)
+        self.assertEqual(connection["sent_bytes"], 0)
         self.assertEqual(connection["received_bytes"], 0)
         self.assertEqual(connection["pid"], "1234")
         self.assertEqual(connection["process"], "process_1")
@@ -203,7 +203,7 @@ class TestNetworkConnectionsMonitor(unittest.TestCase):
             self.assertEqual(result[0]["state"], "ESTABLISHED")
             self.assertEqual(result[0]["local_address"], "127.0.0.1:8080")
             self.assertEqual(result[0]["foreign_address"], "127.0.0.1:8080")
-            self.assertEqual(result[0]["send_bytes"], 0)
+            self.assertEqual(result[0]["sent_bytes"], 0)
             self.assertEqual(result[0]["received_bytes"], 0)
 
     @unittest.mock.patch("os.listdir")
