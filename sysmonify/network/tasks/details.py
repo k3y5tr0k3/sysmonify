@@ -149,13 +149,17 @@ class NetworkDetails(Details):
 
         try:
             if os.path.exists(interface_speed_path):
-                with open(interface_speed_path, "r") as f:
+                with open(interface_speed_path, "rb") as f:
                     speed = f.read().strip()
 
         except FileNotFoundError:
             logger.exception(
-                "Error occurred while retrieving max link speed for interface "
-                f"`{interface_name}` from file `{interface_speed_path}`."
+                f"Unable to find max link speed file `{interface_speed_path}`."
+            )
+
+        except OSError:
+            logger.debug(
+                f"Interface {interface_name} does not support querying Max Link Speed."
             )
 
         except Exception as e:

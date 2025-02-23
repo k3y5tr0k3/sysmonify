@@ -90,7 +90,9 @@ class NetworkStatsMonitor(Monitor):
                         - self._previous_network_stats[interface]["tx"]["dropped"]
                     )
 
-                    seconds = (current_timestamp - self._previous_timestamp).seconds
+                    seconds = (
+                        current_timestamp - self._previous_timestamp
+                    ).total_seconds()
                     rx_mbps = (
                         rx_bytes_delta / 1024 / 1024 / seconds
                         if rx_bytes_delta > 0
@@ -276,9 +278,10 @@ class NetworkConnectionsMonitor(Monitor):
         try:
             process_path = os.readlink(exe_path)
 
-        except Exception:
-            logger.warning("Unable to ")
-            ...
+        except Exception as e:
+            logger.debug(
+                f"Unable to get full process path for PID: {pid}. Message: {e}"
+            )
 
         return process_path
 
@@ -395,7 +398,7 @@ class NetworkConnectionsMonitor(Monitor):
                         Name of the process using connection.
                     - `process_path` (str):
                         Full path of the process.
-                    - `send_bytes` (int):
+                    - `sent_bytes` (int):
                         Number of bytes sent.
                     - `received_bytes` (int):
                         Number of bytes received.
@@ -477,7 +480,7 @@ class NetworkConnectionsMonitor(Monitor):
                         "state": state_str,
                         "local_address": local_address,
                         "foreign_address": foreign_address,
-                        "send_bytes": send_bytes,
+                        "sent_bytes": send_bytes,
                         "received_bytes": received_bytes,
                         "inode": inode,
                     }
@@ -519,7 +522,7 @@ class NetworkConnectionsMonitor(Monitor):
                         Local IP address and port.
                     - `foreign_address` (str):
                         Remote IP address and port.
-                    - `send_bytes` (int):
+                    - `sent_bytes` (int):
                         Bytes sent over the connection.
                     - `received_bytes` (int):
                         Bytes received over the connection.
@@ -539,7 +542,7 @@ class NetworkConnectionsMonitor(Monitor):
                         "state": "ESTABLISHED",
                         "local_address": "127.0.0.1:1234",
                         "foreign_address": "8.8.8.8:80",
-                        "send_bytes": 0,
+                        "sent_bytes": 0,
                         "received_bytes": 0,
                         "inode": "123456",
                         "pid": "1234",
@@ -579,7 +582,7 @@ class NetworkConnectionsMonitor(Monitor):
                         "state": conn.get("state"),
                         "local_address": conn.get("local_address"),
                         "foreign_address": conn.get("foreign_address"),
-                        "send_bytes": conn.get("send_bytes"),
+                        "sent_bytes": conn.get("sent_bytes"),
                         "received_bytes": conn.get("received_bytes"),
                         "inode": conn.get("inode"),
                         "pid": conn.get("pid"),
