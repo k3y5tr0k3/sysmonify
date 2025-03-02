@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static "css/network.css" %}" type="text/css"></link>
+{% endblock additional_styles %}
+
+
+{% block main_content %}
+
+<!-- Network Tabs -->
+<ul class="nav nav-tabs mr-2" id="networkTabs" role="tablist">
+  <li class="nav-item nav-tab" role="presentation">
+    <button class="nav-link tab-link active" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="true">Stats</button>
+  </li>
+  <li class="nav-item nav-tab" role="presentation">
+    <button class="nav-link tab-link" id="connections-tab" data-bs-toggle="tab" data-bs-target="#connections" type="button" role="tab" aria-controls="connections" aria-selected="false">Connections</button>
+  </li>
+</ul>
+<!-- End - Network Tabs -->
+
+<div class="tab-content p-0" id="networkTabContent">
+
+  <!-- Network Stats Tab Content -->
+  <div class="tab-pane fade show active p-0" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+
+    <!-- Network Stats Tab: Row 1 -->
+    <div class="row">
+
+      <!-- Network Interface Choice Dropdown Menu -->
+      <div class="d-flex align-items-center  m-2 mt-3 px-2">
+        <h6 class="pt-2">Select Interface: </h6>
+        <div class="dropdown mx-2 w-75">
+          <button
+            id="dropDownMenuButton"
+            class="btn btn-sm btn-primary dropdown-toggle d-flex justify-content-between rounded-2 w-25"
+            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div id="dropDownButtonText" class="text-truncate"></div>
+            <img src="{% static 'icons/arrow_drop_down.svg' %}" style="height: 15px; width: auto; margin-left: 10px;">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          </div>
+        </div>
+      </div>
+      <!-- End - Network Interface Choice Dropdown Menu -->
+
+    </div>
+    <!-- End - Network Stats Tab:  Row 1 -->
+
+    <!-- Network Stats Tab: Row 2-->
+    <div class="row mt-2">
+      <div class="col-8 d-flex flex-column">
+
+        <!-- Network Usage Chart -->
+        <div class="container-fluid d-flex flex-column" style="padding-left: 0px;">
+          <div class="row d-flex align-items-stretch">
+            <div class="col-12 d-flex flex-column pl-0">
+              <div class="col-12 grid-margin stretch-card flex-grow-1">
+                <div class="card card-rounded">
+                  <div class="card-body p-1 pb-0">
+                    <div class="d-flex justify-content-between p-2">
+                      <h6 class="card-title card-title-dash">Usage</h4>
+                      <h4 id="networkChartText" class="card-title card-title-dash"></h4>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="status-summary-chart-wrapper pb-0 h-100">
+                          <canvas id="networkChart"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Network Usage Chart -->
+
+        <!-- Packet Drop Chart -->
+        <div class="container-fluid d-flex flex-column" style="padding-left: 0px;">
+          <div class="row d-flex align-items-stretch">
+            <div class="col-12 d-flex flex-column pl-0">
+              <div class="col-12 grid-margin stretch-card flex-grow-1">
+                <div class="card card-rounded">
+                  <div class="card-body p-1 pb-0">
+                    <div class="d-flex justify-content-between p-2">
+                      <h6 class="card-title card-title-dash">Dropped Packets</h4>
+                      <h4 id="networkChartText" class="card-title card-title-dash"></h4>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="status-summary-chart-wrapper pb-0 h-100">
+                          <canvas id="packetDropChart"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Packet Drop Chart -->
+
+      </div>
+
+      <!-- Netwrok Interface Details -->
+      <div class="col-4 d-flex flex-column">
+        <div class="row flex-grow">
+          <div class="container-fluid d-flex flex-column">
+            <div class="row d-flex align-items-stretch">
+              <div class="col-12 d-flex flex-column pl-0">
+                <div class="col-12 grid-margin stretch-card flex-grow-1">
+                  <div class="card card-rounded">
+                    <div class="card-body p-1 pb-0">
+                      <div class="d-flex justify-content-between">
+                        <h4 class="card-title card-title-dash px-2 pt-3">Interface Details</h4>
+                      </div>
+                      <hr class="mx-2 pt-0"/>
+                      <div class="cpu-details-card">
+                        <div class="d-flex align-items-center">
+                          <h6 class="cpu-detail-heading">Type: </h6>
+                          <p id="interfaceType"></p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <h6 class="cpu-detail-heading">MAC: </h6>
+                          <p id="interfaceMAC"></p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <h6 class="cpu-detail-heading">IPv4: </h6>
+                          <p id="interfaceIPv4"></p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <h6 class="cpu-detail-heading">IPv6: </h6>
+                          <p id="interfaceIPv6"></p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <h6 class="cpu-detail-heading">Max Link Speed: </h6>
+                          <p id="interfaceMaxLinkSpeed"></p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <h6 class="cpu-detail-heading">MTU: </h6>
+                          <p id="interfaceMTU"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Network Interface Details -->
+
+    </div>
+    <!-- End Network Stats Tab: Row 2 -->
+
+  </div>
+  <!-- End Network Stats Tab Content -->
+
+  <!-- Network Connections Tab Content -->
+  <div class="tab-pane fade h-100 d-flex flex-column overflow-hidden" id="connections" role="tabpanel" aria-labelledby="connections-tab">
+    <div class="col-12 d-flex flex-column flex-grow-1 p-0">
+      <div class="row flex-grow-1 mt-2 overflow-hidden">
+
+        <!-- Network Connections Card -->
+        <div class="row d-flex align-items-stretch flex-grow-1">
+          <div class="col-12 d-flex flex-column h-100 pr-0 mt-2">
+            <div class="row d-flex align-items-stretch flex-grow-1">
+              <div class="col-12 d-flex flex-column p-0 h-100">
+                <div class="col-12 grid-margin stretch-card flex-grow-1">
+                  <div id="networkConnectionsCard" class="card card-rounded d-flex flex-column p-2">
+                    <div class="card-body d-flex flex-column flex-grow-1">
+
+                      <div class="d-sm-flex justify-content-between align-items-start">
+                        <div>
+                          <h4 class="card-title card-title-dash">Connections</h4>
+                          <p class="card-subtitle card-subtitle-dash">Total Connections: 212</p>
+                        </div>
+                        <div>
+                          <div class="dropdown">
+                            <button id="connectionsFilterButton" class="btn btn-sm connections-filter-button" type="button" data-toggle="dropdown" aria-expanded="false">
+                              <img src="{% static "icons/filter.svg" %}"/>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right p-2">
+                              <h6>Filter by</h6>
+                              <div class="">
+                                <form class="filter-option">
+                                  <label for="filterColumns">Column:</label>
+                                  <select name="filterColumns" id="filterColumns" class="filter-by-select-dropdown">
+                                  </select>
+                                </form>
+                              </div>
+                              <div class="">
+                                <form class="filter-option">
+                                  <label for="filterValues">Value:</label>
+                                  <select name="filterValues" id="filterValues" class="filter-by-select-dropdown" disabled>
+                                  </select>
+                                </form>
+                              </div>
+                              <div class="dropdown-divider"></div>
+                              <h6>Sort by</h6>
+                              <div class="">
+                                <form class="filter-option">
+                                  <select name="sortColumns" id="sortColumns" class="filter-by-select-dropdown">
+                                  </select>
+                                </form>
+                                <form class="filter-option">
+                                  <label for="ascending">Ascending</label>
+                                  <input type="checkbox" id="ascending" name="ascending" value="ascending">
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Network Connections Table -->
+                      <div class="table-container table-responsive mt-1 flex-grow-1 overflow-auto">
+                        <table class="table select-table net-connections-table">
+                          <thead>
+                            <tr>
+                              <th>PID</th>
+                              <th>Process</th>
+                              <th>Protocol</th>
+                              <th>State</th>
+                              <th>Local Addr</th>
+                              <th>Foreign Addr</th>
+                              <th>Send</th>
+                              <th>Receive</th>
+                            </tr>
+                          </thead>
+                          <tbody id="networkConnectionTableBody" class="scrollable-table-body">
+                            <!-- Network Connections Go Here-->
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- End - Network Connections Table -->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End - Network Connections Card -->
+
+        <!-- Network Connection Filter Modal -->
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End - Network Connections Filter Modal -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock main_content %}
+
+{% block additional_scripts %}
+<script src="{% static "js/network.js" %}" type="text/javascript"></script>
+{% endblock additional_scripts %}

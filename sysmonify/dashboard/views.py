@@ -19,8 +19,3 @@ def processes_view(request):
 def memory_view(request):
     """Memory view."""
     return render(request, "memory.html")
-
-
-def network_view(request):
-    """Network view."""
-    return render(request, "network.html")

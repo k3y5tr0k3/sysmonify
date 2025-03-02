@@ -1,0 +1,77 @@
+.nav-tabs .tab-pane {
+  border-left: none !important;
+  border-bottom: none !important;
+  border-right: none !important;
+}
+
+.nav-tabs {
+  border-bottom: 2px solid var(--primary-color) !important;
+  margin: 0px;
+}
+
+.nav-tabs .nav-item .nav-link {
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+}
+
+.nav-tabs .nav-item .nav-link {
+  background-color: #e9ecef;
+  color: var(--primary-text-color);
+  border: none;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  border: none !important;
+}
+
+.nav-tabs .nav-item .nav-link:not(.active):hover {
+  background-color: #e3e3e3;
+}
+
+.tab-link {
+  border: none !important;
+}
+
+.tab-pane {
+  max-height: 75vh;
+}
+
+.tab-content {
+  border: none !important;
+}
+
+.main-panel {
+  overflow: hidden !important;
+}
+
+#networkConnectionsCard {
+  height: 77vh;
+}
+
+#connectionsFilterButton {
+  background-color: #e3e3e3;
+  color: var(--primary-text-color);
+}
+
+.connections-filter-button {
+  height: 35px !important;
+  width: 35px !important;
+  padding: 0px !important;
+  border-radius: 5px 5px 5px 5px !important;
+}
+
+#connectionsFilterButton:hover {
+  background-color: var(--primary-color);
+}
+
+.filter-option {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-by-select-dropdown {
+  width: 250px !important;
+  display: block;
+}

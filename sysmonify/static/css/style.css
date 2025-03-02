@@ -21999,30 +21999,14 @@ dl li {
   right: 1.75rem;
 }
 
-.rtl .product-chart-wrapper::-webkit-scrollbar,
-.rtl .settings-panel .tab-content .tab-pane .scroll-wrapper::-webkit-scrollbar,
-.rtl .sidebar-fixed .nav::-webkit-scrollbar,
-.rtl .table-responsive::-webkit-scrollbar,
-.rtl ul.chats::-webkit-scrollbar {
-  width: 0.5em;
+/*********************************************/
+/*   Site-wide Styles                        */
+/*********************************************/
+
+:root {
+  --primary-color: rgba(64, 224, 208, 0.7);
+  --primary-text-color: rgba(102, 102, 102, 1.0);
 }
-.rtl .product-chart-wrapper::-webkit-scrollbar-track,
-.rtl .settings-panel .tab-content .tab-pane .scroll-wrapper::-webkit-scrollbar-track,
-.rtl .sidebar-fixed .nav::-webkit-scrollbar-track,
-.rtl .table-responsive::-webkit-scrollbar-track,
-.rtl ul.chats::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-.rtl .product-chart-wrapper::-webkit-scrollbar-thumb,
-.rtl .settings-panel .tab-content .tab-pane .scroll-wrapper::-webkit-scrollbar-thumb,
-.rtl .sidebar-fixed .nav::-webkit-scrollbar-thumb,
-.rtl .table-responsive::-webkit-scrollbar-thumb,
-.rtl ul.chats::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-}
-/*# sourceMappingURL=maps/style.css.map */
 
 html, body {
   overflow: hidden;
@@ -22033,7 +22017,7 @@ html, body {
 }
 
 #sidebar {
-  background-color: rgba(64, 224, 208, 0.2);;
+  background-color: var(--primary-color);
 }
 
 .network-usage-chart {
@@ -22054,7 +22038,16 @@ thead, tbody tr {
   display: block;
   overflow-y: auto;
   table-layout: fixed;
-  max-height: 180px;
+}
+
+thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
 }
 
 .cpu-details-card {
@@ -22100,7 +22093,30 @@ thead, tbody tr {
   display: none !important;
 }
 
-#dropdownMenuButton {
-  background-color: rgba(64, 224, 208, 0.7);
-  border-color: rgba(64, 224, 208, 0.7);
+#dropDownMenuButton {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--primary-text-color);
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .tab-link {
+  border-radius: 8px 8px 0 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #555;
+  padding: 10px 20px;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff #007bff white;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: rgba(0, 123, 255, 0.1);
 }
