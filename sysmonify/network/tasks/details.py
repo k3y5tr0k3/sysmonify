@@ -49,7 +49,7 @@ class NetworkDetails(Details):
         """Retrieve the MAC address associated with a given network interface.
 
         Retrieves the MAC address for a given network interface name from
-        `/sys/class/net/{interface_name}/address`. If or some reason the address cannot
+        `/sys/class/net/{interface_name}/address`. If for some reason the address cannot
         be retrieved 'Unknown' is returned.
 
         Args:
@@ -186,6 +186,8 @@ class NetworkDetails(Details):
         `/sys/class/net/{interface_name}/uevent` file. If "DEVTYPE=wlan" exists in the
         file the interface type is 'WiFi', else we assume the interface type is
         'Ethernet'.
+
+        TODO: Check if bluetooth connection sharing is different or recognizable.
 
         Args:
             interface_name (str):
