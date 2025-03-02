@@ -31,6 +31,15 @@ class NetworkDetails(Details):
         _get_interface_mac(interface_name: str) -> str:
             Retrieve the MAC address associated with a given network interface.
 
+        _get_interface_mtu(interface_name: str) -> str:
+            Retrieves the MTU (Maximum Transmission Unit) for a given interface.
+
+        _get_interface_max_speed(interface_name: str) -> str:
+            Retrieve the max link speed for a given interface.
+
+        _get_interface_type(interface_name: str) -> str:
+            Retrieve the interface type for a given interface.
+
         get_details() -> dict:
             Retrieve details about all physical network interfaces on the system and
             return the data in a dictionary.
