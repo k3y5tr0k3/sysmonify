@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 
 class NetworkStatsMonitor(Monitor):
-    """A class for retrieving real-time network statistic for all network interfaces on the system.
+    """A class for retrieving real-time network statistics for all network interfaces on the system.
 
     Methods:
         get_metrics() -> dict:
@@ -39,7 +39,12 @@ class NetworkStatsMonitor(Monitor):
     """
 
     def __init__(self):
-        """Default initializer."""
+        """Initializes the instance with default network statistics.
+
+        This constructor sets up the object by initializing:
+        - `_previous_network_stats`: A dictionary to store previous network statistics.
+        - `_previous_timestamp`: A timestamp marking the last recorded network stats update.
+        """
         self._previous_network_stats = {}
         self._previous_timestamp = datetime.datetime.now()
 
@@ -93,6 +98,7 @@ class NetworkStatsMonitor(Monitor):
                     seconds = (
                         current_timestamp - self._previous_timestamp
                     ).total_seconds()
+
                     rx_mbps = (
                         rx_bytes_delta / 1024 / 1024 / seconds
                         if rx_bytes_delta > 0
@@ -173,22 +179,13 @@ class NetworkConnectionsMonitor(Monitor):
         This constructor sets up mappings for TCP connection states and specifies the
         files from which network connection data will be retrieved.
 
-        Attributes:
-            _TCP_STATES (Dict[str, str]):
-                A dictionary mapping hexadecimal TCP state codes to human-readable
-                connection states. Example: `"01"` → `"ESTABLISHED"`,
-                `"0A"` → `"LISTEN"`.
+        This constructor sets up the object by initializing:
+        - `_TCP_STATES`:
+            A dictionary mapping hexadecimal TCP state codes to human-readable
+            connection states.
 
-            _PROC_FILES (List[Tuple[str, str, int]]):
-                A list of tuples representing `/proc/net` files to monitor, each
-                containing:
-                    - File path (str):
-                        Path to the network file (e.g., `"/proc/net/tcp"`).
-                    - Protocol (str):
-                        The network protocol (`"tcp"`, `"tcp6"`, `"udp"`, `"udp6"`).
-                    - Address family (int):
-                        The address family (`socket.AF_INET` for IPv4, `socket.AF_INET6`
-                        for IPv6).
+        - `_PROC_FILES`:
+            A list of tuples representing `/proc/net` files to monitor.
         """
         self._TCP_STATES = {
             "01": "ESTABLISHED",
