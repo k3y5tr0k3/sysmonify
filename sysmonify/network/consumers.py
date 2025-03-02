@@ -31,15 +31,6 @@ class NetworkConsumer(Consumer):
         self.net_con_monitor = NetworkConnectionsMonitor()
         self.net_details = NetworkDetails()
 
-    async def connect(self):
-        """Handles a new WebSocket connection.
-
-        Accepts a websocket connection from the client and calls the
-        `send_message_periodically()` method.
-        """
-        await self.accept()
-        await self.send_message_periodically()
-
     async def get_message_data(self) -> dict:
         """Retrieve network metrics and return the data as a dictionary.
 
