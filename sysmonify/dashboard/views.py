@@ -14,8 +14,3 @@ def index_view(request):
 def processes_view(request):
     """Processes view."""
     return render(request, "processes.html")
-
-
-def memory_view(request):
-    """Memory view."""
-    return render(request, "memory.html")

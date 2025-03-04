@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+<div class="row d-flex flex-row">
+  <!-- Memory Usage Card -->
+  <div class="col-5">
+    <div class="card card-rounded">
+      <div class="card-body p-1 pb-0">
+        <div class="d-flex justify-content-between p-2">
+          <h6 class="card-title card-title-dash">Memory Usage</h6>
+          <h4 id="memoryUtilText" class="card-title card-title-dash"></h4>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 h-100">
+            <div class="status-summary-chart-wrapper pb-0 h-100">
+              <canvas id="memoryChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swap Usage Card -->
+  <div class="col-5">
+    <div class="card card-rounded">
+      <div class="card-body p-1 pb-0">
+        <div class="d-flex justify-content-between p-2">
+          <h6 class="card-title card-title-dash">Swap Usage</h6>
+          <h4 id="swapUtilText" class="card-title card-title-dash"></h4>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 h-100">
+            <div class="status-summary-chart-wrapper pb-0 h-100">
+              <canvas id="swapChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock main_content %}
+
+
+{% block additional_scripts %}
+<script src="{% static "js/memory.js" %}" type="text/javascript"></script>
+{% endblock additional_scripts %}

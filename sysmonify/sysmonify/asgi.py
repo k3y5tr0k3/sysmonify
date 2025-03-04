@@ -16,6 +16,7 @@ from disk.routing import websocket_urlpatterns as disk_websocket_urlpatterns
 from gpu.routing import websocket_urlpatterns as gpu_websocket_urlpatterns
 from network.routing import websocket_urlpatterns as network_websocket_urlpatterns
 from dashboard.routing import websocket_urlpatterns as dashboard_websocket_urlpatterns
+from memory.routing import websocket_urlpatterns as memory_websocket_urlpatterns
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sysmonify.settings")
 
@@ -30,6 +31,7 @@ application = ProtocolTypeRouter(
                 + disk_websocket_urlpatterns
                 + gpu_websocket_urlpatterns
                 + network_websocket_urlpatterns
+                + memory_websocket_urlpatterns
             )
         ),
     }
