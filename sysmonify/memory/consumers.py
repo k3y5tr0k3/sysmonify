@@ -31,7 +31,7 @@ class MemoryConsumer(Consumer):
     async def get_message_data(self) -> dict:
         """Retrieve memory metrics from various memory monitors and return the data as a dictionary."""
         mem_metrics = {
-            "metrics": await self.mem_monitor.get_metrics(),
+            "metrics": self.mem_monitor.get_metrics(),
         }
 
         return mem_metrics
