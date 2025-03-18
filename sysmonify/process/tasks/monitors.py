@@ -63,10 +63,11 @@ class ProcessMonitor(Monitor):
                 for pid, process_info in processes.items():
                     command = self.get_process_command(pid=pid)
 
+                    if not command:
+                        command = process_info.get("COMMAND+", "Unknown")
+
                     metrics[pid] = {
-                        "command": command
-                        if command
-                        else process_info.get("COMMAND+", "Unknown"),
+                        "command": command,
                         "user": process_info.get("USER", "Unknown"),
                         "cpu": process_info.get("CPU%", 0),
                         "memory": process_info.get("MEM%", 0),
