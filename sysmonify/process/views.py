@@ -3,4 +3,10 @@
 Views for process app.
 """
 
-# Create your views here.
+from django.views.generic import TemplateView
+
+
+class ProcessView(TemplateView):
+    """Template view for process app."""
+
+    template_name = "process.html"
