@@ -49,29 +49,3 @@
 #networkConnectionsCard {
   height: 77vh;
 }
-
-#connectionsFilterButton {
-  background-color: #e3e3e3;
-  color: var(--primary-text-color);
-}
-
-.connections-filter-button {
-  height: 35px !important;
-  width: 35px !important;
-  padding: 0px !important;
-  border-radius: 5px 5px 5px 5px !important;
-}
-
-#connectionsFilterButton:hover {
-  background-color: var(--primary-color);
-}
-
-.filter-option {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.filter-by-select-dropdown {
-  width: 250px !important;
-  display: block;
-}
