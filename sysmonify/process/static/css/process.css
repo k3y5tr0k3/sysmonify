@@ -1,0 +1,11 @@
+.main-panel {
+  overflow: hidden !important;
+}
+
+#processesTableBody {
+  height: 75vh !important;
+}
+
+#processCard {
+  max-height: 75vh;
+}
