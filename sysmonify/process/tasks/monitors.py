@@ -53,7 +53,32 @@ class ProcessMonitor(Monitor):
         return command
 
     async def get_metrics(self) -> dict:
-        """Collect system metrics for running processes."""
+        """Collects system metrics for running processes.
+
+        This function asynchronously retrieves information about currently
+        running processes and extracts relevant metrics, including the
+        command, user, CPU usage, memory usage, and uptime.
+
+        It fetches the process list using `Top.get_processes()`, then
+        attempts to retrieve the full command string using `get_process_command()`.
+        If the command is unavailable, it falls back to the "COMMAND+" field
+        from the process data.
+
+        Args:
+            None
+
+        Returns:
+            dict: A dictionary where each key is a process ID (PID) and the
+            value is another dictionary containing:
+                - "command" (str): The full command that started the process.
+                - "user" (str): The user who owns the process.
+                - "cpu" (float): The CPU usage percentage of the process.
+                - "memory" (float): The memory usage percentage of the process.
+                - "up_time" (str): The process runtime in the format `HH:MM:SS`.
+
+        Logs:
+            Logs an exception if an error occurs while retrieving process metrics.
+        """
         metrics = {}
 
         try:
