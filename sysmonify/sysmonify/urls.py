@@ -24,4 +24,5 @@ urlpatterns = [
     path("", include("gpu.urls")),
     path("", include("network.urls")),
     path("", include("memory.urls")),
+    path("", include("process.urls")),
 ]

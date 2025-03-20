@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static "css/process.css" %}" type="text/css"></link>
+{% endblock additional_styles %}
+
+{% block main_content %}
+
+<div class="row">
+  <div class="col-12 d-flex flex-column flex-grow-1 p-0">
+    <div class="row flex-grow-1 mt-2 overflow-hidden">
+
+      <!-- Processes Card -->
+      <div class="row d-flex align-items-stretch flex-grow-1">
+        <div class="col-12 d-flex flex-column h-100 pr-0 mt-2">
+          <div class="row d-flex align-items-stretch flex-grow-1">
+            <div class="col-12 d-flex flex-column p-0 h-100">
+              <div class="col-12 grid-margin stretch-card flex-grow-1">
+                <div class="card card-rounded d-flex flex-column p-2">
+                  <div class="card-body d-flex flex-column flex-grow-1">
+
+                    <div class="d-sm-flex justify-content-between align-items-start">
+                      <div>
+                        <h4 class="card-title card-title-dash">Processes</h4>
+                        <p id="totalProcessesText" class="card-subtitle card-subtitle-dash">Total Processes:</p>
+                      </div>
+                      <div>
+                        <div class="dropdown">
+                          <button id="tableFilterButton" class="btn btn-sm connections-filter-button" type="button" data-toggle="dropdown" aria-expanded="false">
+                            <img src="{% static "icons/filter.svg" %}"/>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-right p-2">
+                            <h6>Filter by</h6>
+                            <div>
+                              <form class="table-filter-option">
+                                <label for="filterColumns">Column:</label>
+                                <select name="filterColumns" id="filterColumns" class="table-filter-by-select-dropdown">
+                                </select>
+                              </form>
+                            </div>
+                            <div>
+                              <form class="table-filter-option">
+                                <label for="filterValues">Value:</label>
+                                <select name="filterValues" id="filterValues" class="table-filter-by-select-dropdown" disabled>
+                                </select>
+                              </form>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <h6>Sort by</h6>
+                            <div>
+                              <form class="table-filter-option">
+                                <select name="sortColumns" id="sortColumns" class="table-filter-by-select-dropdown">
+                                </select>
+                              </form>
+                              <form class="table-filter-option">
+                                <label for="ascending">Ascending</label>
+                                <input type="checkbox" id="ascending" name="ascending" value="ascending">
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Processes Table -->
+                    <div class="table-container table-responsive mt-1 flex-grow-1 overflow-auto">
+                      <table class="table select-table">
+                        <thead>
+                          <tr>
+                            <th>PID</th>
+                            <th>User</th>
+                            <th>Command</th>
+                            <th>CPU</th>
+                            <th>Memory</th>
+                            <th>Up Time</th>
+                          </tr>
+                        </thead>
+                        <tbody id="processesTableBody" class="scrollable-table-body">
+                          <!-- Processes Go Here-->
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- End - Processes Table -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End - Processes Card -->
+
+    </div>
+  </div>
+</div>
+
+{% endblock main_content %}
+
+{% block additional_scripts %}
+<script src="{% static "js/process.js" %}" type="text/javascript"></script>
+{% endblock additional_scripts %}

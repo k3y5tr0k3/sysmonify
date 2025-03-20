@@ -22120,3 +22120,29 @@ thead {
 .nav-tabs .nav-link:hover {
   background-color: rgba(0, 123, 255, 0.1);
 }
+
+#tableFilterButton {
+  background-color: #e3e3e3;
+  color: var(--primary-text-color);
+}
+
+.table-filter-button {
+  height: 35px !important;
+  width: 35px !important;
+  padding: 0px !important;
+  border-radius: 5px 5px 5px 5px !important;
+}
+
+#tableFilterButton:hover {
+  background-color: var(--primary-color);
+}
+
+.table-filter-option {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.table-filter-by-select-dropdown {
+  width: 250px !important;
+  display: block;
+}

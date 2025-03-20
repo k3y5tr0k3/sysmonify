@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "gpu",
     "network",
     "memory",
+    "process",
 ]
 
 # Middleware definition
