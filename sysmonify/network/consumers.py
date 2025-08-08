@@ -36,8 +36,7 @@ class NetworkConsumer(Consumer):
 
         Returns:
             dict:
-                A dictionary containing upto date network metrics such as temperature
-                and utilization.
+                A dictionary containing upto date network connections and metrics metrics.
         """
         net_metrics = {
             "details": await self.net_details.get_details(),
