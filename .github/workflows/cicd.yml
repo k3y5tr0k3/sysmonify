@@ -26,9 +26,8 @@ jobs:
           pip install -r dev-requirements.txt
 
       - name: Run pytest
-        run: |
-          cd sysmonify/
-          pytest
+        working-directory: sysmonify
+        run: pytest
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v5.1.2
