@@ -1,5 +1,7 @@
 # Sysmonify
 
+[![codecov](https://codecov.io/gh/k3y5tr0k3/sysmonify/graph/badge.svg?token=XG66mYxuXh)](https://codecov.io/gh/k3y5tr0k3/sysmonify)
+
 Real-time system resource monitoring for Linux Desktops.
 
 # Development
