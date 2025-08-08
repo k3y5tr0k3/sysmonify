@@ -13,7 +13,7 @@ class TestNetworkConsumer(TestCase):
     """Tests for NetworkConsumer."""
 
     async def test_periodic_network_message(self):
-        """Test that the consumer sends periodic messages containing disks metrics.
+        """Test that the consumer sends periodic messages containing network metrics.
 
         Assert:
             "details" and "stats" and "connections" keys are present in the message.

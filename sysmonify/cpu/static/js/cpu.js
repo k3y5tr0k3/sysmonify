@@ -4,7 +4,7 @@
         let cpuTempChart;
         let cpuTempLabels = Array(60).fill("");
         let cpuTempData = Array(60).fill(0);
-        let cpuTempText = document.getElementById("cpuPackageTempText");
+        const cpuTempText = document.getElementById("cpuPackageTempText");
 
         let cpuUtilChart;
         let cpuUtilLabels = Array(15).fill("");
@@ -12,7 +12,7 @@
         let cpuCoreCount = 0;
         let cpuMinFreq = 400;
         let cpuMaxFreq = 5000;
-        let cpuAvgFreqText = document.getElementById("cpuAvgFreqText")
+        const cpuAvgFreqText = document.getElementById("cpuAvgFreqText");
 
         var graphGradient = document.getElementById("cpuTempChart").getContext('2d');
         var graphGradient2 = document.getElementById("cpuTempChart").getContext('2d');
