@@ -2,71 +2,91 @@
 
 [![codecov](https://codecov.io/gh/k3y5tr0k3/sysmonify/branch/master/graph/badge.svg?token=XG66mYxuXh)](https://codecov.io/gh/k3y5tr0k3/sysmonify)
 
-Real-time system resource monitoring for Linux Desktops.
+![Sysmonify Screenshot](screenshots/dashboard.png)
 
-# Development
+**Real-time system resource monitoring for Linux Desktops.**
+Sysmonify provides live updates on CPU, memory, disk, and network usage through a Django backend, WebSocket updates, and a responsive web interface.
 
-Create virtual environment
+<br><br>
+
+## 🚀 Features
+- **Real-time monitoring** of key system resources.
+- **WebSocket updates** for instant UI refresh.
+- **Lightweight web UI** built with vanilla JS and Bootstrap.
+- **Cross-component stack**: Django + Daphne (ASGI).
+- **Planned integrations** for Gnome desktop overlays.
+
+<br><br>
+
+## 🛠 Development Setup
+
+### 1. Create virtual environment
 
 ```bash
 python3 -m venv venv
 ```
 
-Activate virtual environment
+### 2. Activate virtual environment
 
 ```bash
 source ./venv/bin/activate
 ```
 
+### 3. Install Dependencies
+
 ```bash
 pip install -r dev-requirements.txt
 ```
 
-Set up GitHub pre-commit hooks
+### 4. Set up GitHub pre-commit hooks
 
 ```bash
 pre-commit install
 ```
 
-Collect Static files
+### 5. Collect Static files
 
 ```bash
-cd sysmonify
-python3 manage.py collectstatic
+cd sysmonify && python3 manage.py collectstatic
 ```
 
-Run development sever
+### 6. Run development sever
 
 ```bash
 daphne -b 0.0.0.0 -p 8000 sysmonify.asgi:application
 ```
 
-# Testing
+<br><br>
 
-Create virtual environment
+## 🧪 Testing
+
+### 1. Create virtual environment
 
 ```bash
 python3 -m venv venv
 ```
 
-Activate virtual environment
+### 2. Activate virtual environment
 
 ```bash
 source ./venv/bin/activate
 ```
 
+### 3. Install Dependencies
+
 ```bash
 pip install -r dev-requirements.txt
 ```
 
-Run unit tests
+### 4. Run unit tests
 
 ```bash
-cd sysmonify
-python3 manage.py test
+cd sysmonify && python3 manage.py test
 ```
 
-# Project Roadmap
+<br><br>
+
+## 🗺 Project Roadmap
 
 | Version | Release Date | Details |
 |---------|--------------|---------|
@@ -75,3 +95,21 @@ python3 manage.py test
 | 0.1.0-beta | 31-10-2025 | Additional Features: <br> &nbsp;&nbsp; - User Settings (SQLite). <br> &nbsp;&nbsp; - UI Light/Dark modes <br> &nbsp;&nbsp; - General visual improvements to UI
 | 0.2.0-beta | 30-11-2025 | Gnome overlay
 | 1.0.0 | 31-01-2026 | Additional Features: <br> &nbsp;&nbsp; - View Additional Process Details <br> &nbsp;&nbsp; - Terminate/Kill Process(s) <br> &nbsp;&nbsp; - View Additional Network Connection Details <br> &nbsp;&nbsp; - Terminate/Kill network connections.
+
+---
+
+<br><br>
+
+## 📜 License
+
+[MIT License](LICENSE)
+
+
+## 🤝 Contributing
+
+Pull requests are welcome! Please open an issue first to discuss proposed changes.
+
+
+## 📬 Contact
+
+For questions or suggestions, please open a GitHub issue.
