@@ -182,33 +182,33 @@
                         </div>
                         <div>
                           <div class="dropdown">
-                            <button id="connectionsFilterButton" class="btn btn-sm connections-filter-button" type="button" data-toggle="dropdown" aria-expanded="false">
+                            <button id="tableFilterButton" class="btn btn-sm connections-filter-button" type="button" data-toggle="dropdown" aria-expanded="false">
                               <img src="{% static "icons/filter.svg" %}"/>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right p-2">
                               <h6>Filter by</h6>
-                              <div class="">
-                                <form class="filter-option">
+                              <div>
+                                <form class="table-filter-option">
                                   <label for="filterColumns">Column:</label>
-                                  <select name="filterColumns" id="filterColumns" class="filter-by-select-dropdown">
+                                  <select name="filterColumns" id="filterColumns" class="table-filter-by-select-dropdown">
                                   </select>
                                 </form>
                               </div>
-                              <div class="">
-                                <form class="filter-option">
+                              <div>
+                                <form class="table-filter-option">
                                   <label for="filterValues">Value:</label>
-                                  <select name="filterValues" id="filterValues" class="filter-by-select-dropdown" disabled>
+                                  <select name="filterValues" id="filterValues" class="table-filter-by-select-dropdown" disabled>
                                   </select>
                                 </form>
                               </div>
                               <div class="dropdown-divider"></div>
                               <h6>Sort by</h6>
-                              <div class="">
-                                <form class="filter-option">
-                                  <select name="sortColumns" id="sortColumns" class="filter-by-select-dropdown">
+                              <div>
+                                <form class="table-filter-option">
+                                  <select name="sortColumns" id="sortColumns" class="table-filter-by-select-dropdown">
                                   </select>
                                 </form>
-                                <form class="filter-option">
+                                <form class="table-filter-option">
                                   <label for="ascending">Ascending</label>
                                   <input type="checkbox" id="ascending" name="ascending" value="ascending">
                                 </form>
