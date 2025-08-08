@@ -20,6 +20,12 @@ source ./venv/bin/activate
 pip install -r dev-requirements.txt
 ```
 
+Set up GitHub pre-commit hooks
+
+```bash
+pre-commit install
+```
+
 Collect Static files
 
 ```bash
