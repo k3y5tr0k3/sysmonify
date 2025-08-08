@@ -81,7 +81,7 @@ pip install -r dev-requirements.txt
 ### 4. Run unit tests
 
 ```bash
-cd sysmonify && python3 manage.py test
+cd sysmonify && pytest
 ```
 
 <br><br>
