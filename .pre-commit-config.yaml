@@ -5,8 +5,17 @@ repos:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
     -   id: check-yaml
+
 -   repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.5
     hooks:
     -   id: ruff
     -   id: ruff-format
+
+-   repo: local
+    hooks:
+      - id: check-django-debug
+        name: Ensure Django DEBUG setting is False
+        entry: bash -c 'if grep -q "DEBUG = True" sysmonify/settings.py; then echo "DEBUG is True — fix before commit."; exit 1; fi'
+        language: system
+        pass_filenames: false
