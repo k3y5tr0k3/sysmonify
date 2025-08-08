@@ -52,7 +52,7 @@ docstring-code-format = false
 docstring-code-line-length = "dynamic"
 
 [tool.pytest.ini_options]
-addopts = ["-v", "--junitxml=junit/test-results.xml", "--cov=.", "--cov-report=xml", "--cov-report=html"]
+addopts = ["-v", "--ds=sysmonify.settings", "--junitxml=../junit/test-results.xml", "--cov=.", "--cov-report=xml:../coverage.xml"]
 testpaths = ["tests"]
 filterwarnings = [
     "ignore::DeprecationWarning",
